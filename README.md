@@ -249,6 +249,8 @@ let sameSheet = workbook.getPublishedSheetsInfo().get("Sheet 1");
 ```
 
 In v3, these properties return native JavaScript arrays and you can use JavaScript’s .find to access the individual object:
+                                              
+[See here](https://github.com/tableau/embedding-api-v3-guide/blob/main/SyntaxChanges.md) for a comprehensive list of syntax changes (Coming soon).
 
 ```
 let sameSheet = workbook.publishedSheetsInfo()
