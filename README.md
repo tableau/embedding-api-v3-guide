@@ -99,7 +99,7 @@ To specify options on how to initialize the Viz in the JSAPI v2, you would add t
 </tableau-viz>
 ```
 
-Note: for properties that accept a variety of values, such as url, device, and toolbar the syntax is `<property>=“<value>”`. For properties which are boolean, you either include the flag, to effectively set it to true (as shown with hideTabs), or omit it, to effectively set it to false.
+Note: for properties that accept a variety of values, such as src, device, and toolbar the syntax is `<property>=“<value>”`. For properties which are boolean, you either include the flag, to effectively set it to true (as shown with hideTabs), or omit it, to effectively set it to false.
 
 Here is the list of properties you can add to your viz object:
 
