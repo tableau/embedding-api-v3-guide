@@ -23,7 +23,7 @@ Currently, the Embedding API v3 remains unreleased, but is under active developm
 
 In previous versions of Tableau Server, there existed a JavaScript API v1. It is almost exclusively used in the ‘embed code’ from Tableau Server’s Share dialog.
 
-```
+```html
 <script type='text/javascript' src='https://myserver/javascripts/api/viz_v1.js'></script>
 <div class='tableauPlaceholder' style='width: 1500px; height: 827px;'>
     <object class='tableauViz' width='1500' height='827' style='display:none;'>
@@ -39,7 +39,7 @@ In previous versions of Tableau Server, there existed a JavaScript API v1. It is
 
 To migrate from the JavaScript API v1 to the new JavaScript API v3, you can copy the new embed code which will give you something like:
 
-```
+```html
 <script src = "https://myserver/javascripts/api/tableau.embedding.3.0.0-alpha.23.js"></script>
 <tableau-viz id="tableauViz" 
     src="http://my-server/views/my-workbook/my-view" 
@@ -64,13 +64,13 @@ In the JavaScript API v2, you initialize the viz by adding an empty div object t
  
 HTML (v2 - will also work in v3)
 
-```
+```html
 <div id='tableauViz'></div>
 ```
 
 JavaScript (v2 - going away. For v3 JS initialization see [Alternative Approach: Initialization via JavaScript](https://salesforce.quip.com/RT3iA9KW8u8i#KOTACAbuFCp))
 
-```
+```javascript
 let placeholderDiv = document.getElementById("tableauViz");
 let src = "http://my-server/views/my-workbook/my-view";
 let options = {}
@@ -81,7 +81,7 @@ In the Embedding API v3, the initialization step is simplified and can happen al
 
 HTML:
 
-```
+```html
 <tableau-viz id="tableauViz" 
       src='http://my-server/views/my-workbook/my-view'>
 </tableau-viz>
@@ -92,7 +92,7 @@ HTML:
 To specify options on how to initialize the Viz in the JSAPI v2, you would add those to the options object that is included in the Viz object’s constructor’s arguments. In the Embedding API v3, you can simply add those as properties of the viz component:
 
 
-```
+```html
 <tableau-viz id="tableauViz" 
     src="http://my-server/views/my-workbook/my-view" 
     device="phone" toolbar="bottom" hide-tabs>
@@ -119,7 +119,7 @@ Here is the list of properties you can add to your viz object:
 
 In JSAPI v2 you can specify filtering to occur, by specifying field-value in the url or options object. In the Embedding API v3, you can accomplish the same thing by add <viz-filter> elements as children to your <tableau-viz> objects.
 
-```
+```html
 <tableau-viz id="tableauViz" 
     src="http://my-server/views/my-workbook/my-view" 
     device="phone" toolbar="bottom" hide-tabs>
@@ -140,7 +140,7 @@ One important difference is that in the JSAPI v2 the filters that were loaded on
 
 You can also add event listeners to the <tableau-viz> object
 
-```
+```html
 <tableau-viz id="tableauViz" 
     src="http://my-server/views/my-workbook/my-view"
     onMarksSelected= "handleMarksSelection()">
@@ -155,14 +155,14 @@ There are some scenarios where you may prefer to configure and initialize the vi
 
 HTML:
 
-```
+```html
 <div id='tableauViz'></div>
 ```
 
 
 JavaScript:
 
-```
+```javascript
 import {TableauViz} from '../tableau.embedding.3.0.0-alpha.23.js'
 
 let viz = new TableauViz();
@@ -193,7 +193,7 @@ All of the above discusses how to initialize the Viz and to configure it during 
 If you [initialized the Viz viz JavaScript](https://tableau.quip.com/RT3iA9KW8u8i/Migrating-from-Embedding-JSAPI-v1-or-v2-to-Embedding-API-v3#KOTACAbuFCp), then you already have a Viz object which you can interact with. For example:
 
 
-```
+```javascript
 import {TableauViz} from '../tableau.embedding.3.0.0-alpha.23.js'
 
 let viz = new TableauViz();
@@ -213,7 +213,7 @@ sheet.applyFilterAsync("Container", "Boxes", tableau.FilterUpdateType.REPLACE);
 But if you created a <tableau-viz> object in your html, you need to use document.getElementById to access the viz in your JavaScript:
 
 
-```
+```javascript
 let viz = document.getElementById('tableauViz');
 
 // Later
@@ -230,13 +230,13 @@ sheet.applyFilterAsync("Container", "Boxes", tableau.FilterUpdateType.REPLACE);
 The relationship between objects/namespaces in v3 remains the same [as in the JavaScript API v2](https://help.tableau.com/current/api/js_api/en-us/JavaScriptAPI/js_api_ref.htm#top_level_class_diagram). However, the syntax follows modern JavaScript practices and treats related objects as properties instead of returning them in getter methods.
 For example, to access the activeSheet’s worksheets in the JavaScript API v2, you would previously use 
 
-```
+```javascript
 viz.getActiveSheet().getWorksheets();
 ```
 
 In v3, you use
 
-```
+```javascript
 viz.activeSheet.worksheets;
 ```
 
@@ -244,13 +244,13 @@ The only exception to this is when calling an asynchronous method, such as getUn
 
 In v2, many methods returned a collection of objects instead of a native array, allowing you to call .get to find the individual object that you wanted to act upon. For example:
 
-```
+```javascript
 let sameSheet = workbook.getPublishedSheetsInfo().get("Sheet 1");
 ```
 
 In v3, these properties return native JavaScript arrays and you can use JavaScript’s .find to access the individual object:
 
-```
+```javascript
 let sameSheet = workbook.publishedSheetsInfo()
     .find(sheet => sheet.name == "Sheet 1");
 ```
@@ -279,20 +279,20 @@ There are also two new supporting additions:
 
 Filtering, selecting marks, and changing parameters after initialization remain the same:
 
-```
+```javascript
 worksheet.applyFilterAsync("Product Type", "Coffee", 
     tableau.FilterUpdateType.REPLACE``);
 
 ```
 
-```
+```javascript
 workbook.changeParameterValueAsync("Product Type", "Coffee");
 
 ```
 
 *changeParameterValueAsync is not yet implemented in Developer Preview*
 
-```
+```javascript
 worksheet.selectMarksAsync("Product", "Caffe Latte", 
     tableau.SelectionUpdateType.REPLACE);`
 ```
@@ -301,13 +301,12 @@ worksheet.selectMarksAsync("Product", "Caffe Latte",
 
 Adding and removing event listeners after initialization remains the same:
 
-```
+```javascript
 viz.addEventListener("marksSelection", function (marks) {
    changeMySelectionUI(marks);
 });
 ```
 
-```
+```javascript
 viz.removeEventListener("marksSelection", changeMySelectionUI);
-
 ```
