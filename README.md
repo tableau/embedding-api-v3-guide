@@ -1,19 +1,17 @@
-# Migrating from Embedding JSAPI v1 or v2 to Embedding API v3
+# Migrating from Embedding JSAPI v1 or v2 to Embedding API v3 (Migration Guide)
 
 ## Introduction
 
 With Tableau’s Embedding API v3, we have redesigned the experience for embedding to make your life easier, to modernize the experience, and to enable new functionality.
 (If you are unfamiliar with the JavaScript API v2, you can [read its documentation](https://help.tableau.com/current/api/js_api/en-us/JavaScriptAPI/js_api.htm).)
-
 Some parts of using the API are the same as the JavaScript API v2, and others have just slightly different syntax. But the biggest difference is the initialization of the viz, which uses web components.
-
 Web components are a standard available in all modern browsers, that allow you to add custom, and 3rd party, functionality to your web page using html syntax as easily as adding an image, link, or div. Using the web component technology, we have created a tableau-viz component that you can use to add visualizations to your web pages.
 
 ## How to use this guide
 
 This guide has a few goals: 1) To help you understand key concepts of using the Embedding API v3, 2) to solicit feedback from our community on changes we intend to make, and 3) to help you migrate existing content to v3.
 
-Currently, the Embedding API v3 remains unreleased, but is under active development. Now is the best time for you to leave feedback so that we can make important changes, where appropriate, prior to releasing the final version. If you have comments or feedback, please [submit an Issue on this Github repository](https://github.com/tableau/embedding-api-v3-guide/issues).
+Currently, the Embedding API v3 remains unreleased, but is under active development. Now is the best time for you to leave feedback so that we can make important changes, where appropriate, prior to releasing the final version. If you have comments or feedback, please submit an Issue on this Github repository.
 
 ### Strategies for adopting the Embedding API v3
 
@@ -42,37 +40,39 @@ In previous versions of Tableau Server, there existed a JavaScript API v1. It is
 To migrate from the JavaScript API v1 to the new JavaScript API v3, you can copy the new embed code which will give you something like:
 
 ```
-<script src="https://myserver``/javascripts/api/tableau-3``.min.js"></script>
+`<script`` ``src``=``"https://myserver``/javascripts/api/tableau.embedding.3.0.0-alpha.23.js``"``></script>`
 <tableau-viz id="tableauViz" 
-    url="http://my-server/views/my-workbook/my-view" 
-    device="phone" toolbar="bottom" tabs="hidden">
+    src="http://my-server/views/my-workbook/my-view" 
+    device="phone" toolbar="bottom" hide-tabs>
 </tableau-viz>
 ```
 
+*Check the documentation for the current version of the .js file.*
+
 You will notice that the syntax of v3 is just as easy to copy-paste into your html and appears simpler because of the <tableau-viz> component and its ability to customize the properties of the embedded viz without nesting <param> elements.
-Another key benefit to v3 is how easy it is to go from this simple copy-paste embed scenario to one where you interact with the viz via API. You can get started with the API simply by pasting in the v3 version of the embed code and then start layering on interactions and listeners and you will see below.
+Another key benefit to v3 is how easy it is to go from this simple copy-paste embed scenario to one where you interact with the viz via API. You can get started with the API simply by pasting in the v3 version of the embed code and then start layering on interactions and listeners as you will see below.
 
 Before we do that, let’s take a closer look at the key parts of initializing an embedded viz.
 
 ## Access the API
 
-Accessing the API happens similarly to v1 and v2: You simply include the correct .js file, this time including the tableau-3.js (or a variation of it) from you Server. As before, you can reference the .js from your on-premise Server, from Tableau Online, or from Tableau Public.
+Accessing the API happens similarly to v1 and v2: You simply include the correct .js file, this time including the tableau-3.js (or a variation of it) from your Server. As before, you can reference the .js from your on-premise Server, from Tableau Online, or from Tableau Public.
 
 ## Initialize the API
 
 In the JavaScript API v2, you initialize the viz by adding an empty div object to your html and then create a new tableau.Viz object referencing the div and the viz url. Example:
  
-HTML:
+HTML (v2 - will also work in v3)
 
 ```
 <div id='tableauViz'></div>
 ```
 
-JavaScript:
+JavaScript (v2 - going away. For v3 JS initialization see [Alternative Approach: Initialization via JavaScript](https://salesforce.quip.com/RT3iA9KW8u8i#KOTACAbuFCp))
 
 ```
 let placeholderDiv = document.getElementById("tableauViz");
-let url = "http://my-server/views/my-workbook/my-view";
+let src = "http://my-server/views/my-workbook/my-view";
 let options = {}
 let viz = new tableau.Viz(placeholderDiv, url, options);
 ```
@@ -83,7 +83,7 @@ HTML:
 
 ```
 <tableau-viz id="tableauViz" 
-      url='http://my-server/views/my-workbook/my-view'>
+      src='http://my-server/views/my-workbook/my-view'>
 </tableau-viz>
 ```
 
@@ -94,12 +94,12 @@ To specify options on how to initialize the Viz in the JSAPI v2, you would add t
 
 ```
 <tableau-viz id="tableauViz" 
-    url="http://my-server/views/my-workbook/my-view" 
-    device="phone" toolbar="bottom" hideTabs>
+    src="http://my-server/views/my-workbook/my-view" 
+    device="phone" toolbar="bottom" hide-tabs>
 </tableau-viz>
 ```
 
-Note: for properties that accept a variety of values, such as url, device, and toolbar the syntax is `<property>=“<value>”`. For properties which are boolean, you either include the flag or omit to use the default value as shown with `hideTabs`. 
+Note: for properties that accept a variety of values, such as url, device, and toolbar the syntax is `<property>=“<value>”`. For properties which are boolean, you either include the flag, to effectively set it to true (as shown with hideTabs), or omit it, to effectively set it to false.
 
 Here is the list of properties you can add to your viz object:
 
@@ -107,10 +107,12 @@ Here is the list of properties you can add to your viz object:
 |---	|---	|---	|---	|
 |hide-tabs	|Viz.hideTabs	|boolean	|Indicates whether tabs are hidden or shown.	|
 |toolbar	|Viz.toolbar	|"top", "bottom", "hidden"	|Indicates the position of the toolbar or if it should be hidden	|
-|height	|Viz.height	|<string> (e.g. "800px")	|Can be any valid CSS size specifier. If not specified, defaults to the published height of the view.	|
-|width	|Viz.width	|<string> (e.g. "800px")	|Can be any valid CSS size specifier. If not specified, defaults to the published height of the view.	|
-|device	|Viz.device	|<string>	|Specifies a device layout for a dashboard, if it exists. Values can be `default`, `desktop`, `tablet`, or `phone`. If not specified, defaults to loading a layout based on the smallest dimension of the hosting `iframe` element.	|
-|instance-id-to-clone	|Viz.instanceIdToClone	|<string>	|Specifies the ID of an existing instance to make a copy (clone) of. This is useful if the user wants to continue analysis of an existing visualization without losing the state of the original. If the ID does not refer to an existing visualization, the cloned version is derived from the original visualization.	|
+|height	|Viz.height	|<string> (e.g. "800px" or "800")	|Can be any valid CSS size specifier. If not specified, defaults to the published height of the view.	|
+|width	|Viz.width	|<string> (e.g. "800px" or "800")	|Can be any valid CSS size specifier. If not specified, defaults to the published height of the view.	|
+|device	|Viz.device	|<string>	|
+Specifies a device layout for a dashboard, if it exists. Values can be `default`, `desktop`, `tablet`, or `phone`. If not specified, defaults to loading a layout based on the smallest dimension of the hosting `iframe` element.	|
+|instance-id-to-clone	|Viz.instanceIdToClone	|<string>	|
+Specifies the ID of an existing instance to make a copy (clone) of. This is useful if the user wants to continue analysis of an existing visualization without losing the state of the original. If the ID does not refer to an existing visualization, the cloned version is derived from the original visualization.	|
 |disable-url-actions	|Viz.disableUrlActions	|boolean	|Indicates whether to suppress the execution of URL actions. This option does not prevent the URL action event from being raised. You can use this option to change what happens when a URL action occurs. If set to `true`and you create an event listener for the `URL_ACTION` event, you can use an event listener handler to customize the actions. For example, you can direct the URL to appear in an `iframe`on your web page. See [URL Action Example](https://help.tableau.com/current/api/js_api/en-us/JavaScriptAPI/js_api_ref.htm#urlaction).	|
 
 *When adding properties to the tableau-viz component, use the HTML Property name. When [configuring via JavaScript (as explained below)](https://tableau.quip.com/RT3iA9KW8u8i/Migrating-from-Embedding-JSAPI-v1-or-v2-to-Embedding-API-v3#KOTACAbuFCp), use the JS Property.*
@@ -121,13 +123,13 @@ In JSAPI v2 you can specify filtering to occur, by specifying field-value in the
 
 ```
 <tableau-viz id="tableauViz" 
-    url="http://my-server/views/my-workbook/my-view" 
-    device="phone" toolbar="bottom" tabs="hidden">
+    src="http://my-server/views/my-workbook/my-view" 
+    device="phone" toolbar="bottom" hide-tabs>
     <viz-filter field="country" value="USA" />
-    <viz-filter field="state" value="California, Texas, Washington" />
-    <viz-range-filter field="profit" min="0" max="10000" />
+    <viz-filter field="state" value="California,Texas,Washington"></viz-filter>
+    <viz-range-filter field="profit" min="0" max="10000"></viz-range-filter>
     <viz-relative-date-filter field="Date" anchor-date="March 17, 2001"
-        period-type = "Year" range-type = "LastN" range-n = "2" />
+        period-type = "Year" range-type = "LastN" range-n = "2"></viz-relative-date-filter>
 </tableau-viz>
 ```
 
@@ -142,8 +144,8 @@ You can also add event listeners to the <tableau-viz> object
 
 ```
 <tableau-viz id="tableauViz" 
-    url="http://my-server/views/my-workbook/my-view"
-    onMarksSelected="handleMarksSelection">
+    src="http://my-server/views/my-workbook/my-view"
+    onMarksSelected= "handleMarksSelection()">
 </tableau-viz>
 ```
 
@@ -156,18 +158,18 @@ There are some scenarios where you may prefer to configure and initialize the vi
 HTML:
 
 ```
-<div id='tableauViz></div>
+<div id='tableauViz'></div>
 ```
 
 
 JavaScript:
 
 ```
-import {TableauViz} from '../src/tableau-viz-component.0.js';
+import {TableauViz} from '../tableau.embedding.3.0.0-alpha.23.js'
 
 let viz = new TableauViz();
 
-viz.url = 'http://my-server/views/my-workbook/my-view';
+viz.src = 'http://my-server/views/my-workbook/my-view';
 viz.toolbar = 'hidden';
 viz.addFilter('Region', 'Central');
 viz.addEventListener('marksSelected', handleMarksSelection);
@@ -194,11 +196,11 @@ If you [initialized the Viz viz JavaScript](https://tableau.quip.com/RT3iA9KW8u8
 
 
 ```
-import {TableauViz} from '../src/tableau-viz-component.0.js';
+import {TableauViz} from '../tableau.embedding.3.0.0-alpha.23.js'
 
 let viz = new TableauViz();
 
-viz.url = 'http://my-server/views/my-workbook/my-view';
+viz.src = 'http://my-server/views/my-workbook/my-view';
 viz.toolbar = 'hidden';
 viz.addFilter('Region', 'Central');
 viz.addEventListener('marksSelected', handleMarksSelection);
@@ -206,7 +208,7 @@ viz.addEventListener('marksSelected', handleMarksSelection);
 document.getElementById('tableauViz').appendChild(viz);
 
 // Later
-let sheet = viz.activeSheet;
+let sheet = viz.workbook.activeSheet;
 sheet.applyFilterAsync("Container", "Boxes", tableau.FilterUpdateType.REPLACE);
 ```
 
@@ -245,27 +247,25 @@ The only exception to this is when calling an asynchronous method, such as getUn
 In v2, many methods returned a collection of objects instead of a native array, allowing you to call .get to find the individual object that you wanted to act upon. For example:
 
 ```
-let sameSheet = workbook.getPublishedSheetsInfo().get("Sheet 1");
+`let sameSheet = workbook.getPublishedSheetsInfo().get("Sheet 1");`
 ```
 
 In v3, these properties return native JavaScript arrays and you can use JavaScript’s .find to access the individual object:
-                                              
-[See here](https://github.com/tableau/embedding-api-v3-guide/blob/main/SyntaxChanges.md) for a comprehensive list of syntax changes (Coming soon).
 
 ```
-let sameSheet = workbook.publishedSheetsInfo()
-    .find(sheet => sheet.name == "Sheet 1");
+`let sameSheet = workbook.publishedSheetsInfo()
+    .find(sheet => sheet.name == "Sheet 1");`
 ```
 
 ### Querying Data
 
-In v2, getUnderlyingDataAsync() was deprecated and only available in Tableau 2020.1 or earlier. Therefore, it is not available in v3. Instead [use getUnderlyingTablesAsync() and getUnderlyingTableDataAsync()](https://help.tableau.com/current/api/js_api/en-us/JavaScriptAPI/js_api_ref.htm#gettabledata).
+In v2, getUnderlyingDataAsync() was deprecated and only available in Tableau 2020.1 or earlier. Therefore, it is not available in v3. Instead[use getUnderlyingTablesAsync() and getUnderlyingTableDataAsync()](https://help.tableau.com/current/api/js_api/en-us/JavaScriptAPI/js_api_ref.htm#gettabledata).
 
 getSummaryDataAsync() remains in v3 with the same syntax. However, the following options have been added to getSummaryDataOptions.
 
 |Option	|Accepts	|Description	|
 |---	|---	|---	|
-|columnsToInclude	|int[] (columnID)	|Allows you to specify the list of columnIDs to return	|
+|columnsToIncludeById	|int[] (columnID)	|Allows you to specify the list of columnIDs to return	|
 |maxRows	|int	|Returns the first set of rows up to the number specified	|
 |onlyFormattedValues	|bool	|Only return the formatted values (as specified by the viz author) and not the native values	|
 |onlyNativeValues	|bool	|Only return the native values and not the formatted values	|
@@ -279,20 +279,24 @@ There are also two new supporting additions:
 
 ### Filtering, Selecting Marks, and Changing Parameters
 
-Filtering, selecting marks, abd changing parameters after initialization remain the same:
+Filtering, selecting marks, and changing parameters after initialization remain the same:
 
 ```
-`\worksheet.applyFilterAsync("Product Type", "Coffee", 
-    tableau.FilterUpdateType.REPLACE);
-```
-
-```
-workbook.changeParameterValueAsync("Product Type", "Coffee");
+`worksheet``.applyFilterAsync("Product Type", "Coffee", 
+    tableau.FilterUpdateType.REPLACE``);
+`
 ```
 
 ```
-worksheet.selectMarksAsync("Product", "Caffe Latte", 
-    tableau.SelectionUpdateType.REPLACE);
+`workbook.changeParameterValueAsync("Product Type", "Coffee");
+`
+```
+
+*changeParameterValueAsync is not yet implemented in Developer Preview*
+
+```
+`worksheet.selectMarksAsync("Product", "Caffe Latte", 
+    tableau.SelectionUpdateType.REPLACE);`
 ```
 
 ### Event Listeners
@@ -306,6 +310,6 @@ viz.addEventListener("marksSelection", function (marks) {
 ```
 
 ```
-viz.removeEventListener("marksSelection", changeMySelectionUI);
+`viz.removeEventListener("marksSelection", changeMySelectionUI);
+`
 ```
-
