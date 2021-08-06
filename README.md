@@ -257,7 +257,7 @@ In v3, these properties return native JavaScript arrays and you can use JavaScri
 
 ### Querying Data
 
-In v2, getUnderlyingDataAsync() was deprecated and only available in Tableau 2020.1 or earlier. Therefore, it is not available in v3. Instead[use getUnderlyingTablesAsync() and getUnderlyingTableDataAsync()](https://help.tableau.com/current/api/js_api/en-us/JavaScriptAPI/js_api_ref.htm#gettabledata).
+In v2, getUnderlyingDataAsync() was deprecated and only available in Tableau 2020.1 or earlier. Therefore, it is not available in v3. Instead [use getUnderlyingTablesAsync() and getUnderlyingTableDataAsync()](https://help.tableau.com/current/api/js_api/en-us/JavaScriptAPI/js_api_ref.htm#gettabledata).
 
 getSummaryDataAsync() remains in v3 with the same syntax. However, the following options have been added to getSummaryDataOptions.
 
@@ -280,20 +280,20 @@ There are also two new supporting additions:
 Filtering, selecting marks, and changing parameters after initialization remain the same:
 
 ```
-`worksheet``.applyFilterAsync("Product Type", "Coffee", 
+worksheet.applyFilterAsync("Product Type", "Coffee", 
     tableau.FilterUpdateType.REPLACE``);
-`
+
 ```
 
 ```
-`workbook.changeParameterValueAsync("Product Type", "Coffee");
-`
+workbook.changeParameterValueAsync("Product Type", "Coffee");
+
 ```
 
 *changeParameterValueAsync is not yet implemented in Developer Preview*
 
 ```
-`worksheet.selectMarksAsync("Product", "Caffe Latte", 
+worksheet.selectMarksAsync("Product", "Caffe Latte", 
     tableau.SelectionUpdateType.REPLACE);`
 ```
 
@@ -308,6 +308,6 @@ viz.addEventListener("marksSelection", function (marks) {
 ```
 
 ```
-`viz.removeEventListener("marksSelection", changeMySelectionUI);
-`
+viz.removeEventListener("marksSelection", changeMySelectionUI);
+
 ```
