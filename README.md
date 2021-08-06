@@ -245,14 +245,14 @@ The only exception to this is when calling an asynchronous method, such as getUn
 In v2, many methods returned a collection of objects instead of a native array, allowing you to call .get to find the individual object that you wanted to act upon. For example:
 
 ```
-`let sameSheet = workbook.getPublishedSheetsInfo().get("Sheet 1");`
+let sameSheet = workbook.getPublishedSheetsInfo().get("Sheet 1");
 ```
 
 In v3, these properties return native JavaScript arrays and you can use JavaScript’s .find to access the individual object:
 
 ```
-`let sameSheet = workbook.publishedSheetsInfo()
-    .find(sheet => sheet.name == "Sheet 1");`
+let sameSheet = workbook.publishedSheetsInfo()
+    .find(sheet => sheet.name == "Sheet 1");
 ```
 
 ### Querying Data
