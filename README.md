@@ -40,7 +40,7 @@ In previous versions of Tableau Server, there existed a JavaScript API v1. It is
 To migrate from the JavaScript API v1 to the new JavaScript API v3, you can copy the new embed code which will give you something like:
 
 ```
-`<script`` ``src``=``"https://myserver``/javascripts/api/tableau.embedding.3.0.0-alpha.23.js``"``></script>`
+<script src = "https://myserver/javascripts/api/tableau.embedding.3.0.0-alpha.23.js"></script>
 <tableau-viz id="tableauViz" 
     src="http://my-server/views/my-workbook/my-view" 
     device="phone" toolbar="bottom" hide-tabs>
