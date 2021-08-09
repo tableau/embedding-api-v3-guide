@@ -68,7 +68,7 @@ HTML (v2 - will also work in v3)
 <div id='tableauViz'></div>
 ```
 
-JavaScript (v2 - going away. For v3 JS initialization see [Alternative Approach: Initialization via JavaScript](https://salesforce.quip.com/RT3iA9KW8u8i#KOTACAbuFCp))
+JavaScript (v2 - going away. For v3 JS initialization see [Alternative Approach: Initialization via JavaScript](#alternative-approach-initialization-via-javascript))
 
 ```javascript
 let placeholderDiv = document.getElementById("tableauViz");
@@ -113,7 +113,7 @@ Here is the list of properties you can add to your viz object:
 |instance-id-to-clone	|Viz.instanceIdToClone	|\<string\>	|Specifies the ID of an existing instance to make a copy (clone) of. This is useful if the user wants to continue analysis of an existing visualization without losing the state of the original. If the ID does not refer to an existing visualization, the cloned version is derived from the original visualization.	|
 |disable-url-actions	|Viz.disableUrlActions	|boolean	|Indicates whether to suppress the execution of URL actions. This option does not prevent the URL action event from being raised. You can use this option to change what happens when a URL action occurs. If set to `true`and you create an event listener for the `URL_ACTION` event, you can use an event listener handler to customize the actions. For example, you can direct the URL to appear in an `iframe`on your web page. See [URL Action Example](https://help.tableau.com/current/api/js_api/en-us/JavaScriptAPI/js_api_ref.htm#urlaction).	|
 
-*When adding properties to the tableau-viz component, use the HTML Property name. When [configuring via JavaScript (as explained below)](https://tableau.quip.com/RT3iA9KW8u8i/Migrating-from-Embedding-JSAPI-v1-or-v2-to-Embedding-API-v3#KOTACAbuFCp), use the JS Property.*
+*When adding properties to the tableau-viz component, use the HTML Property name. When [configuring via JavaScript (as explained below)](#alternative-approach-initialization-via-javascript), use the JS Property.*
 
 ### Filtering during initialization
 
@@ -179,7 +179,7 @@ Important notes about the above approach:
 
 * `new TableauViz()` does not render the viz. It creates a viz object so that you can configure the viz before it renders. It renders when you add it to the DOM, through something like document.body.appendChild(viz);
 * You can use JavaScript’s built-in `document` object to choose where in your html you want to add the viz. The above example uses an empty div and getElementById similar to the JavaScript API v2 approach, but you may other approaches depending on your scenario. [Read more about JavaScript’s document object.](https://www.w3schools.com/js/js_htmldom_document.asp)
-* All of the [configuration options listed above as properties of the viz object](https://tableau.quip.com/RT3iA9KW8u8i/Migrating-from-Embedding-JSAPI-v2-to-Embedding-API-v3#KOTACAFSjgy), can be defined in the same manner as `viz.toolbar` above.
+* All of the [configuration options listed above as properties of the viz object](#configuration), can be defined in the same manner as `viz.toolbar` above.
 * Changing the properties, as shown in this example, will re-render the viz if it is already rendered. This is especially important to note for filtering. The addFilter method is not intended to be used after the viz has been initialized, instead use applyFilterAsync (and the other Filtering methods when appropriate).
 
 
@@ -190,7 +190,7 @@ All of the above discusses how to initialize the Viz and to configure it during 
 
 ### Accessing the Viz object
 
-If you [initialized the Viz viz JavaScript](https://tableau.quip.com/RT3iA9KW8u8i/Migrating-from-Embedding-JSAPI-v1-or-v2-to-Embedding-API-v3#KOTACAbuFCp), then you already have a Viz object which you can interact with. For example:
+If you [initialized the Viz viz JavaScript](#alternative-approach-initialization-via-javascript), then you already have a Viz object which you can interact with. For example:
 
 
 ```javascript
