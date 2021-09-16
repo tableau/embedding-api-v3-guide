@@ -117,7 +117,7 @@ Here is the list of properties you can add to your viz object:
 
 ### Filtering during initialization
 
-In JSAPI v2 you can specify filtering to occur, by specifying field-value in the url or options object. In the Embedding API v3, you can accomplish the same thing by add <viz-filter> elements as children to your <tableau-viz> objects.
+In JSAPI v2 you can specify filtering to occur, by specifying field-value in the url or options object. In the Embedding API v3, you can accomplish the same thing by add <viz-filter> elements as children to your <tableau-viz> objects. You can also set an initial parameter value.
 
 ```html
 <tableau-viz id="tableauViz" 
@@ -125,6 +125,7 @@ In JSAPI v2 you can specify filtering to occur, by specifying field-value in the
     device="phone" toolbar="bottom" hide-tabs>
     <viz-filter field="country" value="USA" />
     <viz-filter field="state" value="California,Texas,Washington"></viz-filter>
+    <viz-parameter name="currency" value="dollars" />
     <viz-range-filter field="profit" min="0" max="10000"></viz-range-filter>
     <viz-relative-date-filter field="Date" anchor-date="March 17, 2001"
         period-type = "Year" range-type = "LastN" range-n = "2"></viz-relative-date-filter>
