@@ -144,7 +144,7 @@ You can also add event listeners to the <tableau-viz> object
 ```html
 <tableau-viz id="tableauViz" 
     src="http://my-server/views/my-workbook/my-view"
-    onMarksSelected= "handleMarksSelection()">
+    onMarksSelected="handleMarksSelection">
 </tableau-viz>
 ```
 
