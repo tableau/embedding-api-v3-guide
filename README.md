@@ -26,7 +26,6 @@ The Embedding API v3.0 support basic embedding and [Connected Apps](https://help
 * Viz initialization via JavaScript 
 * More programmatic support for the toolbar actions 
 * Support of mark selection method
-* Embedded Web Authoring
 
 We will continue to release new versions of the Embedding API v3 with every release of Tableau until all JavaScript API v2 users can migrate to Embedding API v3.
 
