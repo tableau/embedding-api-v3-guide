@@ -18,14 +18,17 @@ This guide has a few goals:
 2) to solicit feedback from our community on changes we intend to make 
 3) to help you migrate existing content to v3.
 
-Currently, the Embedding API v3.0 has been released in Tableau 2021.4, but it continues to be under active development. Now is the best time for you to leave feedback so that we can make important changes, where appropriate, prior to releasing the final version. If you have comments or feedback, please submit an Issue on this Github repository.
+Currently, the Embedding API v3.0 has been released in Tableau 2021.4 and v3.1 in Tableau 2022.1, but it continues to be under active development. Now is the best time for you to leave feedback so that we can make important changes, where appropriate, prior to releasing the final version. If you have comments or feedback, please submit an Issue on this Github repository.
 
 ## Roadmap
 
-The Embedding API v3.0 support basic embedding and [Connected Apps](https://help.tableau.com/current/api/embedding_api/en-us/docs/embedding_api_auth.html). Tableau Embedding v3.1 is now in Developer Preview and includes:
-* Viz initialization via JavaScript 
-* More programmatic support for the toolbar actions 
-* Support of mark selection method
+Tableau Embedding v3.2 is now in Developer Preview and includes:
+* Embedded Web Authoring: Embed Tableau authoring experience in your application!
+* Create your own custom context menu: enable your user to take data driven decision directly from the embedded view
+* More support for Tableau events: UrlAction, ParameterChanged, etc
+* Support for Tableau parameters
+* Support for exporting actions
+* Support more filtering methods such as Filter.getAppliedWorksheets() , Filter.setAppliedWorksheets(), etc.
 
 We will continue to release new versions of the Embedding API v3 with every release of Tableau until all JavaScript API v2 users can migrate to Embedding API v3.
 
