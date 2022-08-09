@@ -22,13 +22,11 @@ Currently, the Embedding API v3.0 has been released in Tableau 2021.4 and v3.1 i
 
 ## Roadmap
 
-Tableau Embedding v3.2 is now in Developer Preview and includes:
-* Embedded Web Authoring: Embed Tableau authoring experience in your application!
-* Create your own custom context menu: enable your user to take data driven decision directly from the embedded view
-* More support for Tableau events: UrlAction, ParameterChanged, etc
-* Support for Tableau parameters
-* Support for exporting actions
-* Support more filtering methods such as Filter.getAppliedWorksheets() , Filter.setAppliedWorksheets(), etc.
+Tableau Embedding v3.3 is now in Developer Preview and includes:
+* Custom Views
+* Hierarchical Filters
+* Simplified event handling
+* Basic Story Support
 
 We will continue to release new versions of the Embedding API v3 with every release of Tableau until all JavaScript API v2 users can migrate to Embedding API v3.
 
