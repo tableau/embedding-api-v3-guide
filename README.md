@@ -303,7 +303,7 @@ workbook.changeParameterValueAsync("Product Type", "Coffee");
 
 ```
 
-*changeParameterValueAsync is not yet implemented in Developer Preview*
+*changeParameterValueAsync is available from Tableau Server 2022.3, Use tableau.embedding.3.3.0.js version for this functionality.*
 
 ```javascript
 worksheet.selectMarksAsync("Product", "Caffe Latte", 
