@@ -1,6 +1,6 @@
 # Migrating from Embedding JSAPI v1 or v2 to Embedding API v3 (Migration Guide)
 
-> The initial release of the Embedding API library (version 3.0) was made available as part of Tableau 2021.4 launch. To find out about using the version 3.2 library, see the documentation for the [Tableau Embedding API v3 documentation](https://help.tableau.com/current/api/embedding_api/en-us/index.html). Embedding API library (version 3.3) is now in Developer Preview, see the [documentation for the Tableau Embedding API v3.3 documentation](https://embedding.tableauusercontent.com/preview/getting-started-v3.html).
+> The initial release of the Embedding API library (version 3.0) was made available as part of Tableau 2021.4 launch. To find out about using the version 3.3 library, see the documentation for the [Tableau Embedding API v3 documentation](https://help.tableau.com/current/api/embedding_api/en-us/index.html).
 
 
 
@@ -18,17 +18,12 @@ This guide has a few goals:
 2) to solicit feedback from our community on changes we intend to make 
 3) to help you migrate existing content to v3.
 
-Currently, the Embedding API v3.0 has been released in Tableau 2021.4 and v3.1 in Tableau 2022.1, but it continues to be under active development. Now is the best time for you to leave feedback so that we can make important changes, where appropriate, prior to releasing the final version. If you have comments or feedback, please submit an Issue on this Github repository.
+If you have comments or feedback, please submit an Issue on this Github repository.
 
 ## Roadmap
 
-Tableau Embedding v3.3 is now in Developer Preview and includes:
-* Custom Views
-* Hierarchical Filters
-* Simplified event handling
-* Basic Story Support
-
-We will continue to release new versions of the Embedding API v3 with every release of Tableau until all JavaScript API v2 users can migrate to Embedding API v3.
+Tableau Embedding v3.4 will include:
+* Support for pagination: https://help.tableau.com/current/api/embedding_api/en-us/reference/interfaces/datasourceunderlyingdataoptions.html
 
 ### Strategies for adopting the Embedding API v3
 
@@ -313,6 +308,7 @@ workbook.changeParameterValueAsync("Product Type", "Coffee");
 ```javascript
 worksheet.selectMarksByValueAsync("Product", ["Caffe Latte"], 
     SelectionUpdateType.Replace);
+
 ```
 
 ### Event Listeners
