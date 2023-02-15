@@ -1,6 +1,6 @@
 # Migrating from Embedding JSAPI v1 or v2 to Embedding API v3 (Migration Guide)
 
-> The initial release of the Embedding API library (version 3.0) was made available as part of Tableau 2021.4 launch. To find out about using the latest release version of the library (now 3.4), see the documentation for the [Tableau Embedding API v3 documentation](https://help.tableau.com/current/api/embedding_api/en-us/index.html).
+> The initial release of the Embedding API library (version 3.0) was made available as part of the Tableau 2021.4 launch. To find out about using the current version of the library (now 3.4), see the documentation for the [Tableau Embedding API v3 documentation](https://help.tableau.com/current/api/embedding_api/en-us/index.html).
 
 
 
