@@ -1,6 +1,6 @@
 # Migrating from Embedding JSAPI v1 or v2 to Embedding API v3 (Migration Guide)
 
-> The initial release of the Embedding API library (version 3.0) was made available as part of Tableau 2021.4 launch. To find out about using the version 3.3 library, see the documentation for the [Tableau Embedding API v3 documentation](https://help.tableau.com/current/api/embedding_api/en-us/index.html).
+> The initial release of the Embedding API library (version 3.0) was made available as part of the Tableau 2021.4 launch. To find out about using the current version of the library (now 3.4), see the documentation for the [Tableau Embedding API v3 documentation](https://help.tableau.com/current/api/embedding_api/en-us/index.html).
 
 
 
@@ -13,17 +13,17 @@ Web components are a standard available in all modern browsers, that allow you t
 
 ## How to use this guide
 
-This guide has a few goals: 
+This guide has a few goals:
 1) To help you understand key concepts of using the Embedding API v3 
 2) to solicit feedback from our community on changes we intend to make 
 3) to help you migrate existing content to v3.
 
-If you have comments or feedback, please submit an Issue on this Github repository.
+If you have comments or feedback, please submit an [Issue](https://github.com/tableau/embedding-api-v3-guide/issues) on this Github repository.
 
 ## Roadmap
 
-Tableau Embedding v3.4 will include:
-* Support for pagination: https://help.tableau.com/current/api/embedding_api/en-us/reference/interfaces/datasourceunderlyingdataoptions.html
+For information about the next release of the Tableau Embedding API (version 3.5), see the [Tableau Embedding API v3 Developer Preview
+](https://embedding.tableauusercontent.com/preview/getting-started-v3.html). The Developer Preview includes support for embedding Ask Data.
 
 ### Strategies for adopting the Embedding API v3
 
