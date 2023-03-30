@@ -220,7 +220,7 @@ document.getElementById('tableauViz').appendChild(viz);
 
 // Later
 let sheet = viz.workbook.activeSheet;
-sheet.applyFilterAsync("Container", "Boxes", tableau.FilterUpdateType.Replace);
+sheet.applyFilterAsync("Container", ["Boxes"], FilterUpdateType.Replace);
 ```
 
 But if you created a <tableau-viz> object in your html, you need to use document.getElementById to access the viz in your JavaScript:
@@ -232,7 +232,7 @@ let viz = document.getElementById('tableauViz');
 // Later
 
 let sheet = viz.activeSheet;
-sheet.applyFilterAsync("Container", "Boxes", tableau.FilterUpdateType.Replace);
+sheet.applyFilterAsync("Container", ["Boxes"], FilterUpdateType.Replace);
 ```
 
 *Note: In both of the above examples, the Viz will not be ‘interactive’ immediately after you initialize the Viz object. If you plan on filtering or doing some interaction immediately after initialization you should use the onFirstInteractive event listener to ‘wait’ for the viz object to be ready. This was also true in the JavaScript API v2.*
@@ -294,7 +294,7 @@ Filtering, selecting marks, and changing parameters after initialization remain 
 
 ```javascript
 worksheet.applyFilterAsync("Product Type", "Coffee", 
-    tableau.FilterUpdateType.Replace``);
+    FilterUpdateType.Replace);
 
 ```
 
@@ -306,8 +306,9 @@ workbook.changeParameterValueAsync("Product Type", "Coffee");
 *changeParameterValueAsync is available from Tableau Server 2022.3, Use tableau.embedding.3.3.0.js version for this functionality.*
 
 ```javascript
-worksheet.selectMarksAsync("Product", "Caffe Latte", 
-    tableau.SelectionUpdateType.Replace);`
+worksheet.selectMarksByValueAsync("Product", ["Caffe Latte"], 
+    SelectionUpdateType.Replace);
+
 ```
 
 ### Event Listeners
