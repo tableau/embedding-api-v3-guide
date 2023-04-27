@@ -22,8 +22,8 @@ If you have comments or feedback, please submit an [Issue](https://github.com/ta
 
 ## Roadmap
 
-For information about the next release of the Tableau Embedding API (version 3.5), see the [Tableau Embedding API v3 Developer Preview
-](https://embedding.tableauusercontent.com/preview/getting-started-v3.html). The Developer Preview includes support for embedding Ask Data.
+For information about the next release of the Tableau Embedding API (version 3.6), see the [Tableau Embedding API v3 Developer Preview
+](https://embedding.tableauusercontent.com/preview/getting-started-v3.html). The Developer preview includes new methods for programmatically exporting views directly from Tableau without requiring user intervention, support for custom error handling for connected apps, and create embedded workbooks from scratch, with or without a data source.
 
 ### Strategies for adopting the Embedding API v3
 
