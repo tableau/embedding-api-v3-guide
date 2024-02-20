@@ -286,6 +286,12 @@ There are also two new supporting additions:
 * getSummaryColumnsInfoAsync(): returns only the Column info for when you just need to retrieve metadata about the columns.
 * fieldID property of Column object: for use in columnsToInclude.
 
+### Resetting the active custom view
+
+In v2, to reset the active custom view to the original view, you would use `workbook.showCustomViewAsync()` without providing any arguments.
+
+In v3, to reset the active custom view to the original view, set `viz.src` to its original value used to load the viz.
+
 ## Things that remain the same
 
 ### Filtering, Selecting Marks, and Changing Parameters
