@@ -4,8 +4,8 @@
 
 For further information about the Tableau Embedding API v3 release, please refer to the Tableau help content:
 
-* [Tableau Embedding API v3 documentation](https://help.tableau.com/current/api/embedding_api/en-us/index.html)
-* [Upgrade from Tableau JavaScript API v1 and v2](https://help.tableau.com/current/api/embedding_api/en-us/docs/embedding_api_migration_guide.html)
+* The Embedding API V3 migration guide has moved to [Upgrade from Tableau JavaScript API v1 and v2](https://help.tableau.com/current/api/embedding_api/en-us/docs/embedding_api_migration_guide.html)
+* For further information about the Tableau Embedding API v3 release, please refer to the [Tableau Embedding API v3 documentation](https://help.tableau.com/current/api/embedding_api/en-us/index.html)
 
 ## Reporting Issues
 
